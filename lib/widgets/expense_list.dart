@@ -12,10 +12,6 @@ class ExpenseList extends ConsumerWidget {
     if (expenses.isEmpty) {
       return const Center(child: Text('No expenses found. Add some!'));
     }
-
-    if (expenses.isEmpty) {
-      return const Center(child: Text('No expenses found. Add some!'));
-    }
     return ListView.builder(
       itemCount: expenses.length,
       itemBuilder: (context, index) {

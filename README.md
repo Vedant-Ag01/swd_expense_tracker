@@ -11,7 +11,7 @@ A fully functional Expense Tracker built using Flutter and Riverpod, satisfying 
 - **Edit & Delete:** Modify existing entries or swipe to delete.
 - **Dynamic Math:** Real-time calculation of total expenses.
 - **Category Filter:** Filter the list view by specific categories using a custom dropdown.
-- **Persistent Storage:** Data is seamlessly saved locally across app restarts.
+- **Persistent Storage:** Data is saved locally across app restarts.
 
 ## Technical Stack
 - **Framework:** Flutter

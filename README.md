@@ -1,16 +1,36 @@
-# expense_tracker
+# Expense Tracker - SWD Nucleus Induction
 
-A new Flutter project.
+**Developer:** Vedant Agarwal
+**ID:** 2025A7PS0025H
 
-## Getting Started
+## Objective
+A fully functional Expense Tracker built using Flutter and Riverpod, satisfying all requirements for the SWD Nucleus Induction task.
 
-This project is a starting point for a Flutter application.
+## Features
+- **Add & View:** Log new expenses with title, amount, date, and category.
+- **Edit & Delete:** Modify existing entries or swipe to delete.
+- **Dynamic Math:** Real-time calculation of total expenses.
+- **Category Filter:** Filter the list view by specific categories using a custom dropdown.
+- **Persistent Storage:** Data is seamlessly saved locally across app restarts.
 
-A few resources to get you started if this is your first Flutter project:
+## Technical Stack
+- **Framework:** Flutter
+- **State Management:** Riverpod 
+- **Local Storage:** `shared_preferences`
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Folder Structure
+ Following the required architectural guidelines:
+- `models/` - Core data structures and JSON serialization.
+- `providers/` - Riverpod state management and business logic.
+- `services/` - Local storage logic (`local_storage_service.dart`).
+- `screens/` - Main UI views.
+- `widgets/` - Reusable UI components (`expense_list.dart`, `new_expenses.dart`).
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## AI Usage Disclosure
+ As per the induction guidelines, AI (Google Gemini) was used in an assistive capacity during development:
+- **State Management & Storage:** Used to understand Riverpod's `.fold()` for derived state and to structure the `shared_preferences` JSON serialization.
+- **UI/UX:** Assisted in generating the custom Material purple theme and resolving type mismatch errors in the Flutter `PopupMenuButton`.
+- **Debugging:** Used as a sounding board to troubleshoot strict typing errors in Dart (e.g., understanding the difference between `.where` and `.firstWhere`).
+- **Documentation:** Assisted in structuring and drafting this `README.md` file.
+- *Note: All core logic implementation, widget composition, and the custom "Delete and Replace" editing architecture were conceptualized and written manually.*
+

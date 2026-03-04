@@ -7,7 +7,8 @@ import 'package:intl/intl.dart';
 final formatter = DateFormat.yMd();
 
 class NewExpense extends ConsumerStatefulWidget {
-  const NewExpense({super.key});
+  final Expense? expenseToEdit;
+  const NewExpense({super.key, this.expenseToEdit});
 
   @override
   ConsumerState<NewExpense> createState() => _NewExpenseState();
@@ -18,6 +19,18 @@ class _NewExpenseState extends ConsumerState<NewExpense> {
   final amountController = TextEditingController();
   DateTime? _selectedDate;
   Category _selectedCategory = Category.leisure;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.expenseToEdit != null) {
+      titleController.text = widget.expenseToEdit!.title;
+      amountController.text = widget.expenseToEdit!.amount.toString();
+      _selectedDate = widget.expenseToEdit!.date;
+      _selectedCategory = widget.expenseToEdit!.category;
+    }
+  }
+
   @override
   void dispose() {
     titleController.dispose();
@@ -44,13 +57,15 @@ class _NewExpenseState extends ConsumerState<NewExpense> {
     final enteredAmount = double.tryParse(amountController.text);
     final amountInvalid = enteredAmount == null || enteredAmount < 0;
 
-    if (titleController.text.trim().isEmpty || amountInvalid) {
+    if (titleController.text.trim().isEmpty ||
+        amountInvalid ||
+        _selectedDate == null) {
       showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
           title: const Text('Invalid Input'),
           content: const Text(
-            'Please make sure a valid title and amount was entered.',
+            'Please make sure a valid title,amount and date was entered.',
           ),
           actions: [
             TextButton(
@@ -65,14 +80,20 @@ class _NewExpenseState extends ConsumerState<NewExpense> {
       return;
     }
 
-    final newExpense = Expense(
-      title: titleController.text.trim(),
+    final savedExpense = Expense(
+      title: titleController.text,
       amount: enteredAmount,
       date: _selectedDate!,
       category: _selectedCategory,
     );
 
-    ref.read(expenseCountProvider.notifier).addExpense(newExpense);
+    if (widget.expenseToEdit != null) {
+      ref
+          .read(expenseCountProvider.notifier)
+          .removeExpense(widget.expenseToEdit!.id);
+    }
+
+    ref.read(expenseCountProvider.notifier).addExpense(savedExpense);
     Navigator.pop(context);
   }
 
@@ -94,7 +115,7 @@ class _NewExpenseState extends ConsumerState<NewExpense> {
             controller: amountController,
             keyboardType: TextInputType.number,
             decoration: const InputDecoration(
-              prefixText: '\$ ',
+              prefixText: '₹ ',
               label: Text('Amount'),
             ),
           ),

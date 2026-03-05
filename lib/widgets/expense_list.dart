@@ -37,7 +37,7 @@ class ExpenseList extends ConsumerWidget {
             borderRadius: BorderRadius.circular(12),
           ),
           child: Text(
-            'Total Spent: \$${totalSpent.toStringAsFixed(2)}',
+            'Total Spent: ₹${totalSpent.toStringAsFixed(2)}',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
               fontWeight: FontWeight.bold,
               color: Theme.of(context).colorScheme.onPrimaryContainer,
@@ -76,7 +76,7 @@ class ExpenseList extends ConsumerWidget {
                     ),
                     child: ListTile(
                       title: Text(expense.title),
-                      subtitle: Text('\$${expense.amount.toStringAsFixed(2)}'),
+                      subtitle: Text('₹ ${expense.amount.toStringAsFixed(2)}'),
                       trailing: Text(expense.category.name.toUpperCase()),
                     ),
                   ),
